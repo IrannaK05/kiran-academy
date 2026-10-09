@@ -4,164 +4,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Form</title>
+    <title>Employee Management</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: white;
+            background: #f1f5f9;
+            color: #1e293b;
         }
 
-        .header {
-            height: 45px;
-            background-color: #174783;
+        header {
+            background: #4338ca;
+            color: white;
+            padding: 24px 8%;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin-bottom: 0;
+            color: #e0e7ff;
         }
 
         .container {
-            width: 310px;
-            margin: 30px auto;
-            padding: 15px;
-            border: 1px solid #555;
-            border-radius: 20px;
-            text-align: center;
+            max-width: 950px;
+            margin: 35px auto;
+            padding: 20px;
         }
 
-        h3 {
-            font-weight: normal;
-            margin: 0 0 15px;
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px #0000000d;
         }
 
-        .form-group {
-            display: flex;
-            align-items: center;
-            margin: 5px 35px;
+        h2 {
+            margin-top: 0;
+            color: #3730a3;
         }
 
-        label {
-            width: 45px;
-            text-align: left;
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
         }
 
         input {
-            width: 90px;
-            padding: 2px;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: 2px solid #a5b4fc;
+            border-color: #6366f1;
         }
 
         button {
-            margin: 12px 0 25px;
-            padding: 5px 15px;
-            background: #f5bcbc;
-            border: 1px solid #555;
-            border-radius: 8px;
-            font-size: 15px;
+            background: #4338ca;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 7px;
             cursor: pointer;
+            margin-top: 18px;
+        }
+
+        button:hover {
+            background: #312e81;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+            padding: 7px 10px;
+            margin: 0;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            border: 1px solid #555;
-            border-radius: 12px;
-            overflow: hidden;
         }
 
         th, td {
-            padding: 5px;
-            border-right: 1px solid #555;
-            text-align: center;
+            padding: 13px 10px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
         }
 
         th {
-            font-weight: normal;
-            border-bottom: 1px solid #555;
+            background: #eef2ff;
+            color: #3730a3;
         }
 
-        th:last-child, td:last-child {
-            border-right: none;
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                margin: 15px auto;
+                padding: 12px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header"></div>
+<header>
+    <h1>Employee Management</h1>
+    <p>Manage your employee records in one place.</p>
+</header>
 
-    <div class="container">
-        <h3>Employee Form</h3>
+<div class="container">
+
+    <section class="card">
+        <h2>Add New Employee</h2>
 
         <form id="employeeForm">
-            <div class="form-group">
-                <label for="id">id</label>
-                <input type="number" id="id" required>
+            <div class="form-grid">
+                <input type="number" id="empId"
+                    placeholder="Employee ID" required>
+
+                <input type="text" id="empName"
+                    placeholder="Employee Name" required>
+
+                <input type="text" id="empRole"
+                    placeholder="Job Role" required>
+
+                <input type="number" id="empSalary"
+                    placeholder="Monthly Salary" min="0" required>
             </div>
 
-            <div class="form-group">
-                <label for="name">name</label>
-                <input type="text" id="name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="role">role</label>
-                <input type="text" id="role" required>
-            </div>
-
-            <div class="form-group">
-                <label for="salary">salary</label>
-                <input type="number" id="salary" required>
-            </div>
-
-            <button type="submit">Add Employee</button>
+            <button type="submit">+ Add Employee</button>
         </form>
+    </section>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>role</th>
-                    <th>salary</th>
-                </tr>
-            </thead>
+    <section class="card">
+        <h2>Employee Records</h2>
 
-            <tbody id="employeeTable">
-                <tr>
-                    <td>1</td>
-                    <td>raj</td>
-                    <td>dev</td>
-                    <td>12345</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>tina</td>
-                    <td>test</td>
-                    <td>12345</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Salary</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-    <script>
-        document.getElementById("employeeForm")
-            .addEventListener("submit", function(event) {
-                event.preventDefault();
+                <tbody id="employeeList"></tbody>
+            </table>
+        </div>
+    </section>
 
-                const id = document.getElementById("id").value;
-                const name = document.getElementById("name").value.trim();
-                const role = document.getElementById("role").value.trim();
-                const salary = document.getElementById("salary").value;
+</div>
 
-                const table = document.getElementById("employeeTable");
-                const row = table.insertRow();
+<footer>
+    Employee Management System | Created with HTML, CSS & JavaScript
+</footer>
 
-                row.insertCell(0).textContent = id;
-                row.insertCell(1).textContent = name;
-                row.insertCell(2).textContent = role;
-                row.insertCell(3).textContent = salary;
+<script>
+    const form = document.getElementById("employeeForm");
+    const employeeList = document.getElementById("employeeList");
 
-                this.reset();
+    let employees = JSON.parse(
+        localStorage.getItem("employees") || "[]"
+    );
+
+    function displayEmployees() {
+        employeeList.innerHTML = "";
+
+        employees.forEach((employee, index) => {
+            const row = document.createElement("tr");
+
+            [employee.id, employee.name, employee.role,
+             "₹" + Number(employee.salary).toLocaleString("en-IN")
+            ].forEach(value => {
+                const cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
             });
-    </script>
+
+            const actionCell = document.createElement("td");
+            const deleteButton = document.createElement("button");
+
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "delete-btn";
+
+            deleteButton.addEventListener("click", () => {
+                employees.splice(index, 1);
+                saveEmployees();
+            });
+
+            actionCell.appendChild(deleteButton);
+            row.appendChild(actionCell);
+            employeeList.appendChild(row);
+        });
+    }
+
+    function saveEmployees() {
+        localStorage.setItem("employees", JSON.stringify(employees));
+        displayEmployees();
+    }
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const id = document.getElementById("empId").value.trim();
+
+        if (employees.some(employee => employee.id === id)) {
+            alert("This Employee ID already exists!");
+            return;
+        }
+
+        employees.push({
+            id: id,
+            name: document.getElementById("empName").value.trim(),
+            role: document.getElementById("empRole").value.trim(),
+            salary: document.getElementById("empSalary").value
+        });
+
+        saveEmployees();
+        form.reset();
+    });
+
+    displayEmployees();
+</script>
 
 </body>
 </html>

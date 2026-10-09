@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: white;
+        }
+
+        .header {
+            height: 45px;
+            background-color: #174783;
+        }
+
+        .container {
+            width: 310px;
+            margin: 30px auto;
+            padding: 15px;
+            border: 1px solid #555;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            font-weight: normal;
+            margin: 0 0 15px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin: 5px 35px;
+        }
+
+        label {
+            width: 45px;
+            text-align: left;
+        }
+
+        input {
+            width: 90px;
+            padding: 2px;
+        }
+
+        button {
+            margin: 12px 0 25px;
+            padding: 5px 15px;
+            background: #f5bcbc;
+            border: 1px solid #555;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #555;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 5px;
+            border-right: 1px solid #555;
+            text-align: center;
+        }
+
+        th {
+            font-weight: normal;
+            border-bottom: 1px solid #555;
+        }
+
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header"></div>
+
+    <div class="container">
+        <h3>Employee Form</h3>
+
+        <form id="employeeForm">
+            <div class="form-group">
+                <label for="id">id</label>
+                <input type="number" id="id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="name">name</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role">role</label>
+                <input type="text" id="role" required>
+            </div>
+
+            <div class="form-group">
+                <label for="salary">salary</label>
+                <input type="number" id="salary" required>
+            </div>
+
+            <button type="submit">Add Employee</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>role</th>
+                    <th>salary</th>
+                </tr>
+            </thead>
+
+            <tbody id="employeeTable">
+                <tr>
+                    <td>1</td>
+                    <td>raj</td>
+                    <td>dev</td>
+                    <td>12345</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>tina</td>
+                    <td>test</td>
+                    <td>12345</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById("employeeForm")
+            .addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                const id = document.getElementById("id").value;
+                const name = document.getElementById("name").value.trim();
+                const role = document.getElementById("role").value.trim();
+                const salary = document.getElementById("salary").value;
+
+                const table = document.getElementById("employeeTable");
+                const row = table.insertRow();
+
+                row.insertCell(0).textContent = id;
+                row.insertCell(1).textContent = name;
+                row.insertCell(2).textContent = role;
+                row.insertCell(3).textContent = salary;
+
+                this.reset();
+            });
+    </script>
+
+</body>
+</html>
+```
